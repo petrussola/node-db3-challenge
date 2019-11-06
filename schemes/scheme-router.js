@@ -123,7 +123,14 @@ router.delete("/:id", (req, res) => {
 });
 
 router.post("/:id/addStep", (req, res) => {
-  res.status(200).json({ message: `you've hit the endpoit!` });
+  const { id } = req.params;
+  Schemes.addStep(req.body, id)
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 });
 
 module.exports = router;
